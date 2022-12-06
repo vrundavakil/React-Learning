@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import Accordion from './Components/Accordion.js'
 import SearchComponent from './Components/Search.js'
 import Dropdown from './Components/Dropdown.js'
+import SheetData from './Components/SheetData'
 import Translate from './Components/Translate.js'
+import CountDown from './Components/CountdownTimer.js'
 import Route from './Components/Route.js'
 import Header from "./Components/Header.js";
 const itemArray = [
@@ -25,7 +27,7 @@ export default () => {
 
     return (
         <div className="homePading">
-            <Header/>
+            <Header />
             <Route path='/'>
                 <Accordion itemArray={itemArray} />
             </Route>
@@ -38,7 +40,12 @@ export default () => {
             <Route path='/dropdown'>
                 <Dropdown selected={selected} onSelectedchange={setselected} optionArray={dropdownOptions} lable={'Select Color'} />
             </Route>
+            <Route path='/sheetdata'>
+                <SheetData />
+            </Route>
+            <Route path='/countdown'>
+                <CountDown />
+            </Route>
 
-            
         </div>);
 }
