@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 
-const useCountdown = (targetDate) => {
+const UseCountdown = ({ targetDate }) => {
     const countDownDate = new Date(targetDate).getTime();
 
-    const [countDown, setCountDown] = useState(
-        countDownDate - new Date().getTime()
-    );
+    const [countDown, setCountDown] = useState(countDownDate - new Date().getTime());
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -15,10 +13,6 @@ const useCountdown = (targetDate) => {
         return () => clearInterval(interval);
     }, [countDownDate]);
 
-    return getReturnValues(countDown);
-};
-
-const getReturnValues = (countDown) => {
     // calculate time left
     const days = Math.floor(countDown / (1000 * 60 * 60 * 24));
     const hours = Math.floor(
@@ -27,7 +21,20 @@ const getReturnValues = (countDown) => {
     const minutes = Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((countDown % (1000 * 60)) / 1000);
 
-    return [days, hours, minutes, seconds];
+    if (days + hours + minutes + seconds <= 0) {
+        return <div className="">
+            <span>Expired!!!</span>
+            {/* <p>Please select a future date and time.</p> */}
+        </div>
+
+    } else {
+        return <div className="show-counter">
+            {/* <span>{days} : {hours} : {minutes} : {seconds}</span> */}
+            <span> {hours} : {minutes} : {seconds}</span>
+        </div>
+
+    }
 };
 
-export { useCountdown };
+
+export default UseCountdown
